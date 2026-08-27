@@ -25,7 +25,7 @@ jobs:
             libncursesw5-dev libtinfo6 cmake libffi-dev libssl-dev automake \
             autopoint gettext
           python -m pip install --upgrade pip
-          python -m pip install "buildozer==1.5.0" "cython==0.29.34"
+          python -m pip install "setuptools==65.5.1" "buildozer==1.5.0" "cython==0.29.34"
 
       - name: Compilar APK com Buildozer
         run: buildozer -v android debug
