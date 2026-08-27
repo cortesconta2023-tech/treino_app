@@ -6,18 +6,29 @@ on:
 
 jobs:
   build-apk:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Baixar o codigo
         uses: actions/checkout@v4
 
+      - name: Preparar Python e Java
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias do Buildozer
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential git zip unzip openjdk-17-jdk \
+            autoconf libtool pkg-config zlib1g-dev libncurses5-dev \
+            libncursesw5-dev libtinfo6 cmake libffi-dev libssl-dev automake \
+            autopoint gettext
+          python -m pip install --upgrade pip
+          python -m pip install "buildozer==1.5.0" "cython==0.29.34"
+
       - name: Compilar APK com Buildozer
-        run: >-
-          docker run --rm
-          -v "${{ github.workspace }}:/home/user/hostcwd"
-          kivy/buildozer:latest
-          -v android debug
+        run: buildozer -v android debug
 
       - name: Guardar o APK para download
         uses: actions/upload-artifact@v4
