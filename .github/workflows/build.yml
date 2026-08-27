@@ -1,0 +1,25 @@
+name: Gerar APK Android
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar o codigo
+        uses: actions/checkout@v4
+
+      - name: Compilar APK com Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        with:
+          command: buildozer -v android debug
+
+      - name: Guardar o APK para download
+        uses: actions/upload-artifact@v4
+        with:
+          name: treino-rapido-apk
+          path: bin/*.apk
+          if-no-files-found: error

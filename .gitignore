@@ -1,0 +1,15 @@
+# Arquivos temporarios gerados pelo Buildozer
+.buildozer/
+bin/
+
+# Ambientes e caches Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Arquivos do editor e sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
