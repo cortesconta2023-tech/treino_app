@@ -17,7 +17,7 @@ jobs:
           docker run --rm
           -v "${{ github.workspace }}:/home/user/hostcwd"
           kivy/buildozer:latest
-          buildozer -v android debug
+          -v android debug
 
       - name: Guardar o APK para download
         uses: actions/upload-artifact@v4
